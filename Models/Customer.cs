@@ -11,17 +11,29 @@ namespace CustomerWebApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Customer
     {
         public int CustomerID { get; set; }
+
         public string FirstName { get; set; }
+
+        [Required]
         public string Lastname { get; set; }
+
+        [Required]
         public string Address1 { get; set; }
         public string Address2 { get; set; }
+
+        [Required]
         public string Town { get; set; }
         public string County { get; set; }
+
+        [Required]
         public string Postcode { get; set; }
+
+        [Range(18,65)]
         public int Age { get; set; }
         public string EmailAddress { get; set; }
     }
