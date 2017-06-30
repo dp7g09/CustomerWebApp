@@ -15,9 +15,27 @@ namespace CustomerWebApp.Controllers
         private CustomerDBEntities db = new CustomerDBEntities();
 
         // GET: Customers
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Customers.ToList());
+            var customers = from c in db.Customers
+                         select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(
+                                                s => s.CustomerID.ToString().Contains(searchString) ||
+                                                     s.FirstName.Contains(searchString) ||
+                                                     s.Lastname.Contains(searchString) ||
+                                                     s.Address1.Contains(searchString) ||
+                                                     s.Address2.Contains(searchString) ||
+                                                     s.County.Contains(searchString) ||
+                                                     s.Town.Contains(searchString) ||
+                                                     s.Postcode.Contains(searchString) ||
+                                                     s.EmailAddress.Contains(searchString)
+                                           );
+            }
+
+            return View(customers.ToList());
         }
 
         // GET: Customers/Details/5
