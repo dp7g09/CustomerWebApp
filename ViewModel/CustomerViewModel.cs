@@ -46,6 +46,7 @@ namespace CustomerWebApp.ViewModel
         [Range(18, 65)]
         public int Age { get; set; }
 
+        [EmailAddress]
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
     }
