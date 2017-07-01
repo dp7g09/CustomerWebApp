@@ -7,16 +7,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CustomerWebApp.Models;
+using CustomerWebApp.ViewModel;
+using CustomerWebApp.Abstract;
 
 namespace CustomerWebApp.Controllers
 {
     public class CustomersController : Controller
     {
         private CustomerDBEntities _db;
+        private ICustomerMapper _customerMapper;
 
-        public CustomersController(CustomerDBEntities db)
+        public CustomersController(CustomerDBEntities db, ICustomerMapper customerMapper)
         {
             _db = db;
+            _customerMapper = customerMapper;
         }
 
         // GET: Customers
@@ -69,11 +73,13 @@ namespace CustomerWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,Lastname,Address1,Address2,Town,County,Postcode,Age,EmailAddress")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerID,FirstName,Lastname,Address1,Address2,Town,County,Postcode,Age,EmailAddress")] CustomerViewModel customer)
         {
             if (ModelState.IsValid)
             {
-                _db.Customers.Add(customer);
+                Customer customerModel = _customerMapper.GetCustomer(customer);
+
+                _db.Customers.Add(customerModel);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -101,11 +107,13 @@ namespace CustomerWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,Lastname,Address1,Address2,Town,County,Postcode,Age,EmailAddress")] Customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,Lastname,Address1,Address2,Town,County,Postcode,Age,EmailAddress")] CustomerViewModel customer)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(customer).State = EntityState.Modified;
+                Customer customerModel = _customerMapper.GetCustomer(customer);
+
+                _db.Entry(customerModel).State = EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }

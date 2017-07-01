@@ -65,6 +65,7 @@ namespace CustomerWebApp.App_Start
         {
             kernel.Bind<IMessageHelper>().To<MessageHelper>();
             kernel.Bind<CustomerDBEntities>().To<CustomerDBEntities>();
+            kernel.Bind<ICustomerMapper>().To<CustomerMapper>();
         }
     }
 }
