@@ -12,12 +12,17 @@ namespace CustomerWebApp.Controllers
 {
     public class CustomersController : Controller
     {
-        private CustomerDBEntities db = new CustomerDBEntities();
+        private CustomerDBEntities _db;
+
+        public CustomersController(CustomerDBEntities db)
+        {
+            _db = db;
+        }
 
         // GET: Customers
         public ActionResult Index(string searchString)
         {
-            var customers = from c in db.Customers
+            var customers = from c in _db.Customers
                          select c;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -45,7 +50,7 @@ namespace CustomerWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -68,8 +73,8 @@ namespace CustomerWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
+                _db.Customers.Add(customer);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -83,7 +88,7 @@ namespace CustomerWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -100,8 +105,8 @@ namespace CustomerWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(customer).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -114,7 +119,7 @@ namespace CustomerWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = _db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -127,9 +132,9 @@ namespace CustomerWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
-            db.SaveChanges();
+            Customer customer = _db.Customers.Find(id);
+            _db.Customers.Remove(customer);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -137,7 +142,7 @@ namespace CustomerWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

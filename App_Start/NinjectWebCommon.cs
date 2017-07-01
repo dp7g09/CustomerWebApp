@@ -11,6 +11,7 @@ namespace CustomerWebApp.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using CustomerWebApp.Abstract;
+    using CustomerWebApp.Models;
 
     public static class NinjectWebCommon 
     {
@@ -63,6 +64,7 @@ namespace CustomerWebApp.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IMessageHelper>().To<MessageHelper>();
+            kernel.Bind<CustomerDBEntities>().To<CustomerDBEntities>();
         }
     }
 }
