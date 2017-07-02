@@ -11,38 +11,18 @@ namespace CustomerWebApp.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Customer
     {
         public int CustomerID { get; set; }
-
-        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
         public string Lastname { get; set; }
-
-        [Required]
-        [Display(Name = "Address Line 1")]
         public string Address1 { get; set; }
-
-        [Display(Name = "Address Line 2")]
         public string Address2 { get; set; }
-
-        [Required]
         public string Town { get; set; }
         public string County { get; set; }
-
-        [Required]
-        [Display(Name = "Post Code")]
         public string Postcode { get; set; }
-
-        [Range(18,65)]
         public int Age { get; set; }
-
-        [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
     }
 }
