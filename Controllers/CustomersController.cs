@@ -99,7 +99,9 @@ namespace CustomerWebApp.Controllers
             {
                 return HttpNotFound();
             }
-            return View(customer);
+
+            CustomerViewModel cvm = _customerMapper.GetCustomerViewModel(customer);
+            return View(cvm);
         }
 
         // POST: Customers/Edit/5

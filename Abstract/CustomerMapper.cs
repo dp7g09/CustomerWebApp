@@ -1,4 +1,5 @@
-﻿using CustomerWebApp.Models;
+﻿using System;
+using CustomerWebApp.Models;
 using CustomerWebApp.ViewModel;
 
 namespace CustomerWebApp.Abstract
@@ -19,6 +20,22 @@ namespace CustomerWebApp.Abstract
             customer.Age = cvm.Age;
             customer.EmailAddress = cvm.EmailAddress ?? "";
             return customer;
+        }
+
+        public CustomerViewModel GetCustomerViewModel(Customer customer)
+        {
+            var customerViewModel = new CustomerViewModel();
+            customerViewModel.CustomerID = customer.CustomerID;
+            customerViewModel.FirstName = customer.FirstName ?? "";
+            customerViewModel.Lastname = customer.Lastname;
+            customerViewModel.Address1 = customer.Address1;
+            customerViewModel.Address2 = customer.Address2 ?? "";
+            customerViewModel.Town = customer.Town;
+            customerViewModel.County = customer.County ?? "";
+            customerViewModel.Postcode = customer.Postcode;
+            customerViewModel.Age = customer.Age;
+            customerViewModel.EmailAddress = customer.EmailAddress ?? "";
+            return customerViewModel;
         }
     }
 }
