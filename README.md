@@ -29,10 +29,15 @@ GO
 
 To run the web app:
 
-> Restore packages using the provided nuget.exe at root folder.
+> Build from a Visual Studio command prompt by running the script at root level:
 
-    nuget.exe restore
+    buildall.bat
 
 > Open .sln file in Visual Studio 2017
 > Ctrl+F5
 > Click Customers link on home page.
+
+To run tests:
+> Open Solution in Visual Studio
+> Open Test Explorer from Test menu.
+> Click Run All Tests in Test Explorer windoow. It will run all the 6561 unit test cases.
