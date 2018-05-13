@@ -1,5 +1,5 @@
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(CustomerWebApp.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(CustomerWebApp.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(CustomerWebApp.App_Start.NinjectWebCommon), "Stop")]
 
 namespace CustomerWebApp.App_Start
 {
