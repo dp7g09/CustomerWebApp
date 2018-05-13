@@ -1,5 +1,4 @@
-﻿using System;
-using CustomerWebApp.Models;
+﻿using CustomerWebApp.Models;
 using CustomerWebApp.ViewModel;
 
 namespace CustomerWebApp.Abstract
